@@ -292,6 +292,12 @@ secure_proxy_ssl_header = {{ nova_secure_proxy_ssl_header }}
 auth_strategy = keystone
 enable_instance_password = {{ nova_enable_instance_password }}
 use_forwarded_for = {{ nova_network_services[nova_network_type]['use_forwarded_for'] | bool }}
+{% if nova_vendordata_providers is defined %}
+vendordata_providers = {{ nova_vendordata_providers }}
+{% if nova_vendordata_dynamic_targets is defined %}
+vendordata_dynamic_targets = http://{{ nova_vendordata_dynamic_targets }} 
+{% endif %}
+{% endif %}
 
 [scheduler]
 max_attempts = {{ nova_scheduler_max_attempts }}
